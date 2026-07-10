@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>TCG System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>TCG System</h1>
+
+    <div id="deckbuilder-screen">
+        <h2>① キャラクターを1体選択</h2>
+        <div id="character-select-list"></div>
+
+        <h2>② 山札にするカードを40〜60枚選択（1種類最大3枚まで）</h2>
+        <div id="deck-count-display">選択枚数: 0枚</div>
+        <div id="deck-select-list"></div>
+
+        <br>
+        <button id="go-to-battle-btn" onclick="startBattle()" disabled>戦闘画面へ</button>
+    </div>
+
+    <div id="battle-screen" style="display:none;">
+        <div id="turn-indicator">ターン: - / 手番: -</div>
+
+        <div id="battlefield">
+            <div class="zone-row opponent-zone-row">
+                <div class="zone-slot trap-slot-container" id="opponent-trap-zone"></div>
+                <div class="zone-slot deck-slot">
+                    <img id="opponent-deck-art" class="deck-art" alt="山札">
+                    <div class="zone-count" id="opponent-deck-count">0</div>
+                    <div class="zone-label">山札</div>
+                </div>
+                <div class="zone-slot graveyard-slot">
+                    <img id="opponent-graveyard-art" class="graveyard-art" alt="墓地">
+                    <div class="zone-count" id="opponent-graveyard-count">0</div>
+                    <div class="zone-label">墓地</div>
+                </div>
+            </div>
+
+            <div class="zone-row character-row">
+                <div class="character-slot">
+                    <img id="opponent-character-art" class="character-art" alt="相手キャラクター">
+                    <div class="character-name" id="opponent-character">召喚されていません</div>
+                    <div class="character-status" id="opponent-status">HP: - / コスト: -</div>
+                </div>
+                <div class="character-slot">
+                    <img id="my-character-art" class="character-art" alt="自分キャラクター">
+                    <div class="character-name" id="my-character">召喚されていません</div>
+                    <div class="character-status" id="my-status">HP: - / コスト: -</div>
+                </div>
+            </div>
+
+            <div class="zone-row my-zone-row">
+                <div class="zone-slot trap-slot-container" id="my-trap-zone"></div>
+                <div class="zone-slot deck-slot">
+                    <img id="my-deck-art" class="deck-art" alt="山札">
+                    <div class="zone-count" id="my-deck-count">0</div>
+                    <div class="zone-label">山札</div>
+                </div>
+                <div class="zone-slot graveyard-slot">
+                    <img id="my-graveyard-art" class="graveyard-art" alt="墓地">
+                    <div class="zone-count" id="my-graveyard-count">0</div>
+                    <div class="zone-label">墓地</div>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="endTurn()">ターンエンド</button>
+
+        <div id="hand-area">手札: </div>
+    </div>
+
+    <div id="card-detail-panel">
+        <h3>カード詳細</h3>
+        <div id="card-detail-content">カードをタップすると詳細が表示されます</div>
+    </div>
+
+    <div id="output">準備完了</div>
+
+    <script src="state.js"></script>
+    <script src="assets.js"></script>
+    <script src="controllers.js"></script>
+    <script src="utils.js"></script>
+    <script src="data_loader.js"></script>
+    <script src="deck_builder.js"></script>
+    <script src="turn_engine.js"></script>
+    <script src="effects.js"></script>
+    <script src="chain_system.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
