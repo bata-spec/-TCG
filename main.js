@@ -23,9 +23,18 @@ function summonCharacter(player, cardId, charElementId, statusElementId) {
 
 function buildRandomOpponentDeck() {
     const pool = Object.values(cardDatabase).filter(c => c.type === "マジック" || c.type === "トラップ");
+    const counts = {};
     const result = [];
-    for (let i = 0; i < DECK_MIN; i++) {
-        result.push(pool[Math.floor(Math.random() * pool.length)].id);
+    const targetSize = DECK_MIN + Math.floor(Math.random() * (DECK_MAX - DECK_MIN + 1));
+
+    let safety = 0;
+    while (result.length < targetSize && safety < targetSize * 20) {
+        safety++;
+        const card = pool[Math.floor(Math.random() * pool.length)];
+        counts[card.id] = counts[card.id] || 0;
+        if (counts[card.id] >= MAX_COPIES_PER_CARD) continue; // 1種類3枚までのルールを厳守
+        counts[card.id]++;
+        result.push(card.id);
     }
     return result;
 }
@@ -47,6 +56,7 @@ function initBattle() {
     myPlayer.reflectShield = 0;
     myPlayer.deathCount = 0;
     myPlayer.firstTurnTaken = false;
+    myPlayer.usedMaterials = [];
     myPlayer.controllerType = CONTROLLER_TYPES.HUMAN; // ★ これが漏れていたのが手札非表示の原因
 
     summonCharacter(myPlayer, selectedCharacterId, "my-character", "my-status");
@@ -63,6 +73,7 @@ function initBattle() {
     opponent.reflectShield = 0;
     opponent.deathCount = 0;
     opponent.firstTurnTaken = false;
+    opponent.usedMaterials = [];
     opponent.controllerType = CONTROLLER_TYPES.AI;
 
     summonCharacter(opponent, pickRandomOpponentCharacter(), "opponent-character", "opponent-status");
@@ -73,6 +84,7 @@ function initBattle() {
 
     turnCount = 0;
     currentTurnPlayer = 'me';
+    gameOver = false;
 
     updateTrapDisplay();
     updateBattleDeckCounts();

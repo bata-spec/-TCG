@@ -30,10 +30,12 @@ function runControllerTurn(player) {
 // 自分のターン中：使えるマジックを優先度順に使い切り、出せるならトラップを1枚セットして終了する。
 // （相手＝人間側のトラップ発動は、それとは別に chain_system.js が行動のたびに自動判定している）
 function runAiTurn(player) {
+    if (gameOver) return;
     setTimeout(() => aiPlayTurn(player), 600);
 }
 
 function aiPlayTurn(player) {
+    if (gameOver) return;
     playAllAffordableAiMagic(player);
 
     const trapIndex = player.hand.findIndex(id => cardDatabase[id] && cardDatabase[id].type === 'トラップ');

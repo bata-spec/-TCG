@@ -44,6 +44,20 @@ button:disabled {
 }
 
 #deck-select-list { max-height: 40vh; overflow-y: auto; }
+.deck-sort-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    font-size: 0.9em;
+}
+.deck-sort-bar select {
+    background: #1c1f2e;
+    color: #eee;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 4px;
+}
 .deck-select-row {
     display: flex;
     align-items: center;
@@ -64,7 +78,26 @@ button:disabled {
     flex: 1;
     cursor: pointer;
 }
-.deck-qty-input { width: 3em; flex-shrink: 0; }
+.deck-qty-stepper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+.qty-btn {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    font-size: 1.1em;
+}
+.qty-value {
+    display: inline-block;
+    min-width: 1.4em;
+    text-align: center;
+    font-weight: bold;
+}
 
 /* --- 戦闘画面 --- */
 
@@ -155,16 +188,43 @@ button:disabled {
 #hand-area button { display: inline-block; margin: 3px; }
 
 #card-detail-panel {
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
     margin-top: 12px;
     padding: 10px;
     background: #1c1f2e;
-    border-radius: 8px;
+    border-top: 2px solid #4a5578;
+    border-radius: 8px 8px 0 0;
+    max-height: 42vh;
+    overflow-y: auto;
+    box-shadow: 0 -6px 14px rgba(0, 0, 0, 0.5);
 }
 .detail-art {
     width: 100px;
     border-radius: 6px;
     float: left;
     margin-right: 10px;
+}
+.detail-qty-control {
+    clear: both;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #444;
+}
+.detail-qty-control .qty-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 1.3em;
+}
+.detail-qty-control #detail-qty-value {
+    font-size: 1.2em;
+    font-weight: bold;
+    min-width: 1.6em;
+    text-align: center;
 }
 
 #output {

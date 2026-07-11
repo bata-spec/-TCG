@@ -13,6 +13,15 @@
         <div id="character-select-list"></div>
 
         <h2>② 山札にするカードを40〜60枚選択（1種類最大3枚まで）</h2>
+        <div class="deck-sort-bar">
+            <label for="deck-sort-select">並び替え：</label>
+            <select id="deck-sort-select" onchange="deckSortMode = this.value; renderDeckSelect();">
+                <option value="type">種類順（デフォルト）</option>
+                <option value="effect">効果ごと</option>
+                <option value="cost">コストが低い順</option>
+                <option value="name">名前順</option>
+            </select>
+        </div>
         <div id="deck-count-display">選択枚数: 0枚</div>
         <div id="deck-select-list"></div>
 

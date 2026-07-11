@@ -21,6 +21,7 @@ function createPlayer() {
         deathCount: 0,
         firstTurnTaken: false, // false のうちは初期手札分のみ（ターン開始時ドローをスキップ）
         deck: [], hand: [], graveyard: [],
+        usedMaterials: [], // 使用済みの覚醒素材カードID一覧（現在のキャラクター用）
         traps: [null, null, null, null, null],
         trapsRevealed: [false, false, false, false, false],
         trapSealedTurns: 0,
@@ -42,10 +43,12 @@ let gameMode = null; // 'single' | 'local2p' | 'network'（未実装）
 
 let turnCount = 0;
 let currentTurnPlayer = 'me';
+let gameOver = false;
 
 // --- デッキ構築セッション用の一時状態（今構築中のプレイヤーの選択） ---
 let selectedCharacterId = null;
 let deckSelection = {};
+let deckSortMode = 'type';
 let deck = [];
 
 const DECK_MIN = 40;

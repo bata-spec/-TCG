@@ -43,14 +43,44 @@ function renderCharacterSelect() {
     });
 }
 
+const TYPE_ORDER = ["マジック", "トラップ", "素材", "キー"];
+
+function getSortedDeckCards() {
+    const cards = Object.values(cardDatabase).filter(c => TYPE_ORDER.includes(c.type));
+
+    switch (deckSortMode) {
+        case 'effect':
+            cards.sort((a, b) => {
+                const ea = a.effectId || a.type;
+                const eb = b.effectId || b.type;
+                if (ea !== eb) return ea < eb ? -1 : 1;
+                return a.cost - b.cost;
+            });
+            break;
+        case 'cost':
+            cards.sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name, 'ja'));
+            break;
+        case 'name':
+            cards.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
+            break;
+        case 'type':
+        default:
+            cards.sort((a, b) => {
+                const ta = TYPE_ORDER.indexOf(a.type);
+                const tb = TYPE_ORDER.indexOf(b.type);
+                if (ta !== tb) return ta - tb;
+                return a.cost - b.cost;
+            });
+    }
+    return cards;
+}
+
 function renderDeckSelect() {
     const container = document.getElementById('deck-select-list');
     if (!container) return;
     container.innerHTML = "";
 
-    Object.values(cardDatabase).forEach(card => {
-        if (card.type !== "マジック" && card.type !== "トラップ") return;
-
+    getSortedDeckCards().forEach(card => {
         deckSelection[card.id] = deckSelection[card.id] || 0;
 
         const row = document.createElement("div");
@@ -66,26 +96,49 @@ function renderDeckSelect() {
         label.innerText = `[${card.type}] ${card.name}（コスト${card.cost}）`;
         label.onclick = () => showCardDetail(card.id);
 
-        const input = document.createElement("input");
-        input.type = "number";
-        input.min = "0";
-        input.max = String(MAX_COPIES_PER_CARD);
-        input.value = deckSelection[card.id];
-        input.className = "deck-qty-input";
-        input.oninput = () => {
-            let v = parseInt(input.value, 10);
-            if (isNaN(v) || v < 0) v = 0;
-            if (v > MAX_COPIES_PER_CARD) v = MAX_COPIES_PER_CARD;
-            input.value = v;
-            deckSelection[card.id] = v;
-            updateDeckCount();
-        };
+        const stepper = document.createElement("div");
+        stepper.className = "deck-qty-stepper";
+
+        const minusBtn = document.createElement("button");
+        minusBtn.className = "qty-btn";
+        minusBtn.innerText = "−";
+        minusBtn.onclick = () => stepCardQty(card.id, -1);
+
+        const qtyValue = document.createElement("span");
+        qtyValue.className = "qty-value";
+        qtyValue.id = `qty-value-${card.id}`;
+        qtyValue.innerText = deckSelection[card.id];
+
+        const plusBtn = document.createElement("button");
+        plusBtn.className = "qty-btn";
+        plusBtn.innerText = "＋";
+        plusBtn.onclick = () => stepCardQty(card.id, 1);
+
+        stepper.appendChild(minusBtn);
+        stepper.appendChild(qtyValue);
+        stepper.appendChild(plusBtn);
 
         row.appendChild(img);
         row.appendChild(label);
-        row.appendChild(input);
+        row.appendChild(stepper);
         container.appendChild(row);
     });
+}
+
+// +/− ボタンでの枚数変更（リスト側・詳細パネル側の両方をその場で同期）
+function stepCardQty(cardId, delta) {
+    let v = (deckSelection[cardId] || 0) + delta;
+    if (v < 0) v = 0;
+    if (v > MAX_COPIES_PER_CARD) v = MAX_COPIES_PER_CARD;
+    deckSelection[cardId] = v;
+
+    const rowValue = document.getElementById(`qty-value-${cardId}`);
+    if (rowValue) rowValue.innerText = v;
+
+    const detailValue = document.getElementById('detail-qty-value');
+    if (detailValue) detailValue.innerText = v;
+
+    updateDeckCount();
 }
 
 function getDeckTotal() {

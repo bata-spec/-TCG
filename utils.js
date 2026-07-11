@@ -118,6 +118,21 @@ function showCardDetail(cardId) {
         card.abilities.forEach(a => { html += `${a.text}<br>`; });
     }
     if (card.flavor) html += `<em>${card.flavor}</em>`;
+
+    // デッキ構築画面で、かつデッキに入れられる種類のカードなら、説明と同じ場所で枚数を編集できるようにする
+    const builderScreen = document.getElementById('deckbuilder-screen');
+    const inBuilder = builderScreen && builderScreen.style.display !== 'none';
+    const deckable = ["マジック", "トラップ", "素材", "キー"].includes(card.type);
+    if (inBuilder && deckable) {
+        const qty = deckSelection[cardId] || 0;
+        html += `<div class="detail-qty-control">
+            <span>デッキ枚数：</span>
+            <button onclick="stepCardQty('${cardId}', -1)">−</button>
+            <span id="detail-qty-value">${qty}</span>
+            <button onclick="stepCardQty('${cardId}', 1)">＋</button>
+        </div>`;
+    }
+
     content.innerHTML = html;
 }
 
@@ -161,7 +176,7 @@ function applyDamage(player, damage, charElementId, statusElementId) {
             updateDisplay(`!!! ${card.name} 破壊（${player.deathCount}回目） !!!`);
 
             if (player.deathCount >= 3) {
-                updateDisplay("🏁 GAME SET! 敗北です！");
+                endGame(player, '3回破壊');
             } else {
                 player.hp = player.maxHp;
                 player.od = player.maxOd;
@@ -171,4 +186,16 @@ function applyDamage(player, damage, charElementId, statusElementId) {
     }
 
     updateFieldDisplay(player, charElementId, statusElementId);
+}
+
+// 試合を終了させる（多重呼び出し防止つき）。以後の行動を全て止める。
+function endGame(loserPlayer, reason) {
+    if (gameOver) return;
+    gameOver = true;
+
+    updateDisplay(`🏁 GAME SET！${getPlayerLabel(loserPlayer)}の敗北（${reason}）`);
+
+    document.querySelectorAll('#battle-screen button').forEach(btn => btn.disabled = true);
+    const handArea = document.getElementById('hand-area');
+    if (handArea) handArea.innerHTML = "ゲーム終了";
 }

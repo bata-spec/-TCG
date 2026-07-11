@@ -12,11 +12,11 @@ function payCost(player, cost) {
 }
 
 function drawCard(player, n) {
-    const label = getPlayerLabel(player);
     for (let i = 0; i < n; i++) {
+        if (gameOver) return;
         if (player.deck.length === 0) {
-            updateDisplay(`⚠️ ${label}の山札が0枚です（山札切れ判定は未実装）`);
-            break;
+            endGame(player, '山札切れ');
+            return;
         }
         const cardId = player.deck.shift();
         player.hand.push(cardId);
@@ -24,6 +24,7 @@ function drawCard(player, n) {
 }
 
 function startTurn() {
+    if (gameOver) return;
     turnCount++;
     const player = getActivePlayer();
 
@@ -47,6 +48,7 @@ function startTurn() {
 }
 
 function endTurn() {
+    if (gameOver) return;
     currentTurnPlayer = (currentTurnPlayer === 'me') ? 'opponent' : 'me';
     maybeShowPassScreen();
     startTurn();
@@ -64,6 +66,7 @@ function maybeShowPassScreen() {
 }
 
 function handleHandCardClick(index) {
+    if (gameOver) return;
     const player = getActivePlayer();
     const cardId = player.hand[index];
     const card = cardDatabase[cardId];
@@ -73,6 +76,10 @@ function handleHandCardClick(index) {
         useMagic(index);
     } else if (card.type === 'トラップ') {
         setTrapFromHand(index);
+    } else if (card.type === '素材') {
+        useMaterialCard(index);
+    } else if (card.type === 'キー') {
+        useKeyCard(index);
     } else {
         updateDisplay(`⚠️ ${card.name} はまだプレイ方法が実装されていません。`);
     }
@@ -131,6 +138,92 @@ function setTrapFromHand(index) {
 
     updateHandDisplay();
     updateTrapDisplay();
+}
+
+// --- 覚醒システム（素材カード・キーカード） ---
+
+function useMaterialCard(index) {
+    const player = getActivePlayer();
+    const cardId = player.hand[index];
+    const card = cardDatabase[cardId];
+    if (!card || card.type !== '素材') return;
+
+    if (card.cost > player.od) {
+        updateDisplay(`❌ コストが足りません（必要:${card.cost} / 所持:${player.od}）`);
+        return;
+    }
+    if (player.currentCard !== card.parentCharacterId) {
+        updateDisplay(`❌ ${card.name} は今場に出ているキャラクターには使用できません。`);
+        return;
+    }
+    if (player.usedMaterials.includes(cardId)) {
+        updateDisplay(`⚠️ ${card.name} はすでに使用済みです。`);
+        return;
+    }
+
+    payCost(player, card.cost);
+    player.hand.splice(index, 1);
+    player.graveyard.push(cardId);
+    player.usedMaterials.push(cardId);
+
+    updateDisplay(`🔹 ${getPlayerLabel(player)}が「${card.name}」を使用（覚醒の証：${player.usedMaterials.length}/3）`);
+
+    refreshFieldDisplay(player);
+    updateHandDisplay();
+    updateGraveyardDisplay(player);
+}
+
+function useKeyCard(index) {
+    const player = getActivePlayer();
+    const cardId = player.hand[index];
+    const card = cardDatabase[cardId];
+    if (!card || card.type !== 'キー') return;
+
+    if (card.cost > player.od) {
+        updateDisplay(`❌ コストが足りません（必要:${card.cost} / 所持:${player.od}）`);
+        return;
+    }
+    if (player.currentCard !== card.parentCharacterId) {
+        updateDisplay(`❌ ${card.name} は今場に出ているキャラクターには使用できません。`);
+        return;
+    }
+
+    const requiredMaterials = card.materials || [];
+    const allReady = requiredMaterials.length > 0 &&
+        requiredMaterials.every(matId => player.usedMaterials.includes(matId));
+
+    if (!allReady) {
+        const done = requiredMaterials.filter(matId => player.usedMaterials.includes(matId)).length;
+        updateDisplay(`❌ 覚醒条件を満たしていません（証 ${done}/${requiredMaterials.length}）`);
+        return;
+    }
+
+    payCost(player, card.cost);
+    player.hand.splice(index, 1);
+    player.graveyard.push(cardId);
+
+    awakenCharacter(player, card.resultId);
+    updateGraveyardDisplay(player);
+}
+
+function awakenCharacter(player, resultId) {
+    const exCard = cardDatabase[resultId];
+    if (!exCard) {
+        updateDisplay(`❌ 覚醒先カード「${resultId}」が見つかりません`);
+        return;
+    }
+
+    player.currentCard = resultId;
+    player.hp = exCard.hp;
+    player.maxHp = exCard.hp;
+    player.od = exCard.od;
+    player.maxOd = exCard.od;
+    player.usedMaterials = [];
+
+    updateDisplay(`✨✨ ${getPlayerLabel(player)}のキャラクターが覚醒！「${exCard.name}」になった！`);
+
+    refreshFieldDisplay(player);
+    updateHandDisplay();
 }
 
 // --- 場の描画（デッキ枚数・トラップゾーン） ---
