@@ -1,9 +1,11 @@
 // main.js - 初期化処理(司令塔役)
 
 function onDataLoaded() {
-    updateDisplay("デッキを構築してください。");
-    gameMode = 'single'; // 現状は「自分 vs AI」のみ対応
-    initDeckBuilder();
+    updateDisplay("モードを選択してください。");
+    const modeScreen = document.getElementById('mode-select-screen');
+    const builderScreen = document.getElementById('deckbuilder-screen');
+    if (modeScreen) modeScreen.style.display = "block";
+    if (builderScreen) builderScreen.style.display = "none";
 }
 
 function summonCharacter(player, cardId, charElementId, statusElementId) {
@@ -21,10 +23,22 @@ function summonCharacter(player, cardId, charElementId, statusElementId) {
     updateDisplay(`[召喚] ${card.name} 配置！`);
 }
 
-function buildRandomOpponentDeck() {
+function buildRandomOpponentDeck(characterId) {
     const pool = Object.values(cardDatabase).filter(c => c.type === "マジック" || c.type === "トラップ");
     const counts = {};
     const result = [];
+
+    // キャラクターの覚醒に必要な素材・キーカードは、AIも覚醒を狙えるよう確定で1枚ずつ入れる
+    const baseCard = cardDatabase[characterId];
+    if (baseCard && baseCard.awakening) {
+        [...baseCard.awakening.materials, baseCard.awakening.keyCard].forEach(id => {
+            if (cardDatabase[id]) {
+                result.push(id);
+                counts[id] = 1;
+            }
+        });
+    }
+
     const targetSize = DECK_MIN + Math.floor(Math.random() * (DECK_MAX - DECK_MIN + 1));
 
     let safety = 0;
@@ -44,55 +58,78 @@ function pickRandomOpponentCharacter() {
     return characterIds[Math.floor(Math.random() * characterIds.length)];
 }
 
-function initBattle() {
-    // --- 自分側のセットアップ ---
-    myPlayer.deck = deck.slice();
-    myPlayer.hand = [];
-    myPlayer.graveyard = [];
-    myPlayer.traps = [null, null, null, null, null];
-    myPlayer.trapsRevealed = [false, false, false, false, false];
-    myPlayer.trapSealedTurns = 0;
-    myPlayer.damageReduction = 0;
-    myPlayer.reflectShield = 0;
-    myPlayer.deathCount = 0;
-    myPlayer.firstTurnTaken = false;
-    myPlayer.usedMaterials = [];
-    myPlayer.controllerType = CONTROLLER_TYPES.HUMAN; // ★ これが漏れていたのが手札非表示の原因
+// 対戦開始時のプレイヤー状態リセット＋キャラクター召喚をまとめた共通処理
+// （シングルプレイのmyPlayer/AI、ローカル2人対戦のプレイヤー1/2、すべてここを通る）
+function resetPlayerForBattle(player, deckArray, characterId, controllerType, charElementId, statusElementId) {
+    player.deck = deckArray;
+    player.hand = [];
+    player.graveyard = [];
+    player.traps = [null, null, null, null, null];
+    player.trapsRevealed = [false, false, false, false, false];
+    player.trapSealedTurns = 0;
+    player.damageReduction = 0;
+    player.reflectShield = 0;
+    player.deathCount = 0;
+    player.firstTurnTaken = false;
+    player.usedMaterials = [];
+    player.abilitySealedTurns = 0;
+    player.usedAbilitiesThisTurn = {};
+    player.characterNegateCharges = {};
+    player.controllerType = controllerType;
 
-    summonCharacter(myPlayer, selectedCharacterId, "my-character", "my-status");
+    summonCharacter(player, characterId, charElementId, statusElementId);
+}
 
-    // --- 相手側のセットアップ（現状はAIの自動対戦相手） ---
-    opponent.deck = buildRandomOpponentDeck();
-    shuffleDeck(opponent.deck);
-    opponent.hand = [];
-    opponent.graveyard = [];
-    opponent.traps = [null, null, null, null, null];
-    opponent.trapsRevealed = [false, false, false, false, false];
-    opponent.trapSealedTurns = 0;
-    opponent.damageReduction = 0;
-    opponent.reflectShield = 0;
-    opponent.deathCount = 0;
-    opponent.firstTurnTaken = false;
-    opponent.usedMaterials = [];
-    opponent.controllerType = CONTROLLER_TYPES.AI;
+async function initBattle() {
+    // 前回の対戦が終了状態(gameOver=true)のまま呼ばれることがある（再戦時）ため、
+    // 何よりも先にリセットしておく。ここが後回しだと、直後のドロー処理が
+    // 「ゲーム終了済み」と誤判定されて即座に中断してしまう。
+    gameOver = false;
+    targetSelectionState = null;
+    listSelectionState = null;
+    hideActionPrompt();
 
-    summonCharacter(opponent, pickRandomOpponentCharacter(), "opponent-character", "opponent-status");
+    if (gameMode === 'local2p') {
+        // --- ローカル2人対戦：プレイヤー1・プレイヤー2ともに人間操作 ---
+        const p1Deck = buildDeckArrayFrom(player1Build.deckSelection);
+        shuffleDeck(p1Deck);
+        resetPlayerForBattle(myPlayer, p1Deck, player1Build.characterId, CONTROLLER_TYPES.HUMAN, "my-character", "my-status");
+
+        const p2Deck = buildDeckArrayFrom(player2Build.deckSelection);
+        shuffleDeck(p2Deck);
+        resetPlayerForBattle(opponent, p2Deck, player2Build.characterId, CONTROLLER_TYPES.HUMAN, "opponent-character", "opponent-status");
+    } else {
+        // --- シングルプレイ：自分 vs AI（相手デッキは毎回ランダム生成） ---
+        resetPlayerForBattle(myPlayer, deck.slice(), selectedCharacterId, CONTROLLER_TYPES.HUMAN, "my-character", "my-status");
+
+        const opponentCharacterId = pickRandomOpponentCharacter();
+        const opponentDeck = buildRandomOpponentDeck(opponentCharacterId);
+        shuffleDeck(opponentDeck);
+        resetPlayerForBattle(opponent, opponentDeck, opponentCharacterId, CONTROLLER_TYPES.AI, "opponent-character", "opponent-status");
+    }
 
     // --- 初期手札 ---
-    drawCard(myPlayer, 5);
-    drawCard(opponent, 5);
+    await drawCard(myPlayer, 5);
+    await drawCard(opponent, 5);
+    if (gameOver) return;
 
     turnCount = 0;
     currentTurnPlayer = 'me';
-    gameOver = false;
 
     updateTrapDisplay();
     updateBattleDeckCounts();
     updateGraveyardDisplay(myPlayer);
     updateGraveyardDisplay(opponent);
     updateHandDisplay();
+    refreshAbilityDisplay();
 
-    updateDisplay(`山札構築完了：自分 ${myPlayer.deck.length}枚 / 相手 ${opponent.deck.length}枚`);
+    updateDisplay(`山札構築完了：${getPlayerLabel(myPlayer)} ${myPlayer.deck.length}枚 / ${getPlayerLabel(opponent)} ${opponent.deck.length}枚`);
 
-    startTurn();
+    if (gameMode === 'local2p') {
+        // デッキ構築を終えたばかりの端末はプレイヤー2側が持っているはずなので、
+        // 最初の手番であるプレイヤー1に一度渡してもらう
+        await showPassScreen('プレイヤー1に端末を渡してください', 'プレイヤー1が準備できたらタップ');
+    }
+
+    await startTurn();
 }

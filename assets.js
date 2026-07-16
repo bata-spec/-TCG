@@ -17,8 +17,9 @@ const CHARACTER_ART_MAP = {
     "救国の魔女": CARD_ART_DIR + "救国の魔女.webp",
     "ジャンヌ・ダルク": CARD_ART_DIR + "救国の魔女EX.webp", // EX001の名前
     "亡国の魔女": CARD_ART_DIR + "亡国の魔女.webp",
-    "マリー・アントワネット": CARD_ART_DIR + "亡国の魔女EX.webp" // EX002の名前
-    // 「傾国の魔女」系はまだイラスト未着手のため未登録 → 自動でカード裏面にフォールバックする
+    "マリー・アントワネット": CARD_ART_DIR + "亡国の魔女EX.webp", // EX002の名前
+    "傾国の魔女": CARD_ART_DIR + "傾国の魔女.jpg",
+    "九尾の狐・玉藻前": CARD_ART_DIR + "九尾の狐・玉藻前.jpg" // EX003の名前
 };
 
 // カード情報からイラストパスを返す。

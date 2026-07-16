@@ -1,10 +1,98 @@
 // deck_builder.js - デッキ構築画面の処理
+// シングルプレイ（vs AI）とローカル2人対戦の両方で共用する。
+// ローカル2人対戦の場合は、この画面を「プレイヤー1→（端末を渡す）→プレイヤー2」の順に2回通ってから対戦開始する。
+
+const DECK_STORAGE_KEY = 'walpurgis_tcg_saved_decks';
+
+// --- モード選択 ---
+
+function selectGameMode(mode) {
+    gameMode = mode;
+    localBuildPhase = (mode === 'local2p') ? 'p1' : null;
+    player1Build = null;
+    player2Build = null;
+    selectedCharacterId = null;
+    deckSelection = {};
+
+    const modeScreen = document.getElementById('mode-select-screen');
+    const builderScreen = document.getElementById('deckbuilder-screen');
+    if (modeScreen) modeScreen.style.display = "none";
+    if (builderScreen) builderScreen.style.display = "block";
+
+    initDeckBuilder();
+}
+
+function backToModeSelect() {
+    gameMode = null;
+    localBuildPhase = null;
+    player1Build = null;
+    player2Build = null;
+
+    const modeScreen = document.getElementById('mode-select-screen');
+    const builderScreen = document.getElementById('deckbuilder-screen');
+    if (builderScreen) builderScreen.style.display = "none";
+    if (modeScreen) modeScreen.style.display = "block";
+}
+
+// --- 初期化・画面ごとの見出し/ボタン設定 ---
 
 function initDeckBuilder() {
     renderCharacterSelect();
     renderDeckSelect();
     updateDeckCount();
+    renderSavedDeckList();
+    checkAwakeningWarning();
+    configureBuilderScreenForPhase();
 }
+
+// ローカル2人対戦は同じ画面を2回使う（プレイヤー1→プレイヤー2）ため、
+// 見出しと下部ボタンの文言・動作をフェーズに応じて切り替える。
+function configureBuilderScreenForPhase() {
+    const heading = document.getElementById('deckbuilder-heading');
+    const btn = document.getElementById('go-to-battle-btn');
+    if (!heading || !btn) return;
+
+    if (gameMode === 'local2p' && localBuildPhase === 'p1') {
+        heading.innerText = 'プレイヤー1：キャラクターとデッキを選択してください';
+        btn.innerText = '次へ（プレイヤー2に交代）';
+        btn.onclick = () => confirmLocalBuildStep();
+    } else if (gameMode === 'local2p' && localBuildPhase === 'p2') {
+        heading.innerText = 'プレイヤー2：キャラクターとデッキを選択してください';
+        btn.innerText = '対戦開始';
+        btn.onclick = () => confirmLocalBuildStep();
+    } else {
+        heading.innerText = 'デッキを構築してください';
+        btn.innerText = '戦闘画面へ';
+        btn.onclick = () => startBattle();
+    }
+    updateGoButtonState();
+}
+
+// ローカル2人対戦：現在のプレイヤーの構築内容を確定し、次のプレイヤーへ（またはそのまま対戦開始へ）進む
+function confirmLocalBuildStep() {
+    const total = getDeckTotal();
+    if (!selectedCharacterId || total < DECK_MIN || total > DECK_MAX) {
+        updateDisplay(`❌ キャラクターと${DECK_MIN}〜${DECK_MAX}枚の山札を選択してください。`);
+        return;
+    }
+
+    if (localBuildPhase === 'p1') {
+        player1Build = { characterId: selectedCharacterId, deckSelection: { ...deckSelection } };
+        localBuildPhase = 'p2';
+        selectedCharacterId = null;
+        deckSelection = {};
+
+        // プレイヤー1のデッキが見えないよう、渡す演出を挟んでから次の構築画面を出す
+        showPassScreen('プレイヤー2に端末を渡してください', 'プレイヤー2が準備できたらタップ').then(() => {
+            initDeckBuilder();
+        });
+    } else if (localBuildPhase === 'p2') {
+        player2Build = { characterId: selectedCharacterId, deckSelection: { ...deckSelection } };
+        startBattle();
+    }
+}
+
+// --- キャラクター選択 ---
 
 function renderCharacterSelect() {
     const container = document.getElementById('character-select-list');
@@ -22,9 +110,11 @@ function renderCharacterSelect() {
         radio.type = "radio";
         radio.name = "character-select";
         radio.value = card.id;
+        radio.checked = (card.id === selectedCharacterId);
         radio.onchange = () => {
             selectedCharacterId = card.id;
             updateGoButtonState();
+            checkAwakeningWarning();
         };
 
         const img = document.createElement("img");
@@ -42,6 +132,37 @@ function renderCharacterSelect() {
         container.appendChild(label);
     });
 }
+
+// 選択中のキャラクターが覚醒に必要な素材・キーカードをデッキに入れ忘れていないか警告する
+function checkAwakeningWarning() {
+    const warningBox = document.getElementById('awakening-warning');
+    if (!warningBox) return;
+
+    if (!selectedCharacterId) {
+        warningBox.style.display = "none";
+        return;
+    }
+
+    const charCard = cardDatabase[selectedCharacterId];
+    if (!charCard || !charCard.awakening) {
+        warningBox.style.display = "none";
+        return;
+    }
+
+    const required = [...(charCard.awakening.materials || []), charCard.awakening.keyCard].filter(Boolean);
+    const missing = required.filter(cardId => !deckSelection[cardId] || deckSelection[cardId] < 1);
+
+    if (missing.length === 0) {
+        warningBox.style.display = "none";
+        return;
+    }
+
+    const missingNames = missing.map(cardId => (cardDatabase[cardId] ? cardDatabase[cardId].name : cardId));
+    warningBox.innerText = `⚠️ このキャラクターの覚醒に必要なカードがデッキに入っていません：${missingNames.join('、')}（覚醒できなくても対戦は可能です）`;
+    warningBox.style.display = "block";
+}
+
+// --- デッキ選択（マジック・トラップ・素材・キー） ---
 
 const TYPE_ORDER = ["マジック", "トラップ", "素材", "キー"];
 
@@ -139,6 +260,7 @@ function stepCardQty(cardId, delta) {
     if (detailValue) detailValue.innerText = v;
 
     updateDeckCount();
+    checkAwakeningWarning();
 }
 
 function getDeckTotal() {
@@ -160,12 +282,17 @@ function updateGoButtonState() {
     btn.disabled = !ok;
 }
 
-function buildDeckArray() {
+function buildDeckArrayFrom(selection) {
     const arr = [];
-    Object.entries(deckSelection).forEach(([cardId, qty]) => {
+    Object.entries(selection).forEach(([cardId, qty]) => {
         for (let i = 0; i < qty; i++) arr.push(cardId);
     });
     return arr;
+}
+
+// 既存の呼び出し元（グローバルのdeckSelectionを使う版）との互換のために残す
+function buildDeckArray() {
+    return buildDeckArrayFrom(deckSelection);
 }
 
 function shuffleDeck(arr) {
@@ -176,17 +303,141 @@ function shuffleDeck(arr) {
 }
 
 function startBattle() {
-    const total = getDeckTotal();
-    if (!selectedCharacterId || total < DECK_MIN || total > DECK_MAX) {
-        updateDisplay(`❌ キャラクターと${DECK_MIN}〜${DECK_MAX}枚の山札を選択してください。`);
-        return;
+    if (gameMode === 'local2p') {
+        if (!player1Build || !player2Build) {
+            updateDisplay('❌ 2人分のデッキ構築が完了していません。');
+            return;
+        }
+    } else {
+        const total = getDeckTotal();
+        if (!selectedCharacterId || total < DECK_MIN || total > DECK_MAX) {
+            updateDisplay(`❌ キャラクターと${DECK_MIN}〜${DECK_MAX}枚の山札を選択してください。`);
+            return;
+        }
+        deck = buildDeckArray();
+        shuffleDeck(deck);
     }
-
-    deck = buildDeckArray();
-    shuffleDeck(deck);
 
     document.getElementById('deckbuilder-screen').style.display = "none";
     document.getElementById('battle-screen').style.display = "block";
 
     initBattle();
+}
+
+// --- デッキの保存・読み込み（localStorage） ---
+
+function loadSavedDecks() {
+    try {
+        const raw = localStorage.getItem(DECK_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function saveSavedDecksList(list) {
+    try {
+        localStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(list));
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+function saveCurrentDeck() {
+    const nameInput = document.getElementById('deck-save-name');
+    const name = (nameInput && nameInput.value.trim()) || '';
+    if (!name) {
+        updateDisplay('❌ デッキ名を入力してください。');
+        return;
+    }
+    if (!selectedCharacterId) {
+        updateDisplay('❌ キャラクターを選択してから保存してください。');
+        return;
+    }
+    const total = getDeckTotal();
+    if (total < DECK_MIN || total > DECK_MAX) {
+        updateDisplay(`❌ ${DECK_MIN}〜${DECK_MAX}枚になるよう調整してから保存してください。`);
+        return;
+    }
+
+    const list = loadSavedDecks();
+    const entry = { name, characterId: selectedCharacterId, deckSelection: { ...deckSelection } };
+    const existingIndex = list.findIndex(d => d.name === name);
+    if (existingIndex !== -1) {
+        list[existingIndex] = entry; // 同名なら上書き保存
+    } else {
+        list.push(entry);
+    }
+
+    if (saveSavedDecksList(list)) {
+        updateDisplay(`💾 デッキ「${name}」を保存しました。`);
+        if (nameInput) nameInput.value = '';
+        renderSavedDeckList();
+    } else {
+        updateDisplay('❌ デッキの保存に失敗しました（この端末ではブラウザの保存機能が使えない可能性があります）。');
+    }
+}
+
+function renderSavedDeckList() {
+    const container = document.getElementById('saved-deck-list');
+    if (!container) return;
+    container.innerHTML = "";
+
+    const list = loadSavedDecks();
+    if (list.length === 0) {
+        container.innerText = '保存されたデッキはまだありません。';
+        return;
+    }
+
+    list.forEach((entry, index) => {
+        const row = document.createElement('div');
+        row.className = 'saved-deck-row';
+
+        const charCard = cardDatabase[entry.characterId];
+        const total = Object.values(entry.deckSelection).reduce((a, b) => a + b, 0);
+
+        const label = document.createElement('span');
+        label.className = 'saved-deck-label';
+        label.innerText = `${entry.name}（${charCard ? charCard.name : entry.characterId} / ${total}枚）`;
+
+        const loadBtn = document.createElement('button');
+        loadBtn.innerText = '読み込む';
+        loadBtn.onclick = () => loadSavedDeck(index);
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerText = '削除';
+        deleteBtn.onclick = () => deleteSavedDeck(index);
+
+        row.appendChild(label);
+        row.appendChild(loadBtn);
+        row.appendChild(deleteBtn);
+        container.appendChild(row);
+    });
+}
+
+function loadSavedDeck(index) {
+    const list = loadSavedDecks();
+    const entry = list[index];
+    if (!entry) return;
+
+    selectedCharacterId = entry.characterId;
+    deckSelection = { ...entry.deckSelection };
+
+    renderCharacterSelect();
+    renderDeckSelect();
+    updateDeckCount();
+    checkAwakeningWarning();
+
+    updateDisplay(`📂 デッキ「${entry.name}」を読み込みました。`);
+}
+
+function deleteSavedDeck(index) {
+    const list = loadSavedDecks();
+    const entry = list[index];
+    if (!entry) return;
+    list.splice(index, 1);
+    saveSavedDecksList(list);
+    renderSavedDeckList();
+    updateDisplay(`🗑️ デッキ「${entry.name}」を削除しました。`);
 }

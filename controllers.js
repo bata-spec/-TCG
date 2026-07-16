@@ -28,15 +28,22 @@ function runControllerTurn(player) {
 
 // --- AI操作 ---
 // 自分のターン中：使えるマジックを優先度順に使い切り、出せるならトラップを1枚セットして終了する。
-// （相手＝人間側のトラップ発動は、それとは別に chain_system.js が行動のたびに自動判定している）
+// （相手＝人間側のトラップ発動・無効化選択は、それとは別に chain_system.js が行動のたびに判定している）
 function runAiTurn(player) {
     if (gameOver) return;
     setTimeout(() => aiPlayTurn(player), 600);
 }
 
-function aiPlayTurn(player) {
+async function aiPlayTurn(player) {
     if (gameOver) return;
-    playAllAffordableAiMagic(player);
+    await playAllAffordableAiMagic(player);
+    if (gameOver) return;
+
+    playAiMaterialsAndKey(player);
+    if (gameOver) return;
+
+    await playAiAbility(player);
+    if (gameOver) return;
 
     const trapIndex = player.hand.findIndex(id => cardDatabase[id] && cardDatabase[id].type === 'トラップ');
     const hasEmptySlot = player.traps.includes(null);
@@ -48,7 +55,63 @@ function aiPlayTurn(player) {
     setTimeout(() => endTurn(), 500);
 }
 
-function playAllAffordableAiMagic(player) {
+// 手札にある自分のキャラクター用の素材カードを使い切り、条件を満たしていればキーカードで覚醒する
+function playAiMaterialsAndKey(player) {
+    let progressed = true;
+    let safety = 0;
+    while (progressed && safety < 10) {
+        progressed = false;
+        safety++;
+
+        const matIndex = player.hand.findIndex(id => {
+            const c = cardDatabase[id];
+            return c && c.type === '素材' && c.parentCharacterId === player.currentCard &&
+                c.cost <= player.od && !player.usedMaterials.includes(id);
+        });
+        if (matIndex !== -1) {
+            useMaterialCard(matIndex);
+            progressed = true;
+            continue;
+        }
+
+        const keyIndex = player.hand.findIndex(id => {
+            const c = cardDatabase[id];
+            if (!c || c.type !== 'キー' || c.parentCharacterId !== player.currentCard || c.cost > player.od) return false;
+            return (c.materials || []).every(matId => player.usedMaterials.includes(matId));
+        });
+        if (keyIndex !== -1) {
+            useKeyCard(keyIndex);
+            progressed = true;
+        }
+    }
+}
+
+// 使えるキャラクター能力（アクティブ・コスト以内・今ターン未使用）があれば1つ使う
+async function playAiAbility(player) {
+    if (player.abilitySealedTurns > 0) return;
+    const baseCard = cardDatabase[player.currentCard];
+    if (!baseCard || !baseCard.abilities) return;
+
+    player.usedAbilitiesThisTurn = player.usedAbilitiesThisTurn || {};
+
+    const index = baseCard.abilities.findIndex(a =>
+        a.type === 'active' && a.cost <= player.od && !player.usedAbilitiesThisTurn[a.abilityId]
+    );
+    if (index === -1) return;
+
+    const ability = baseCard.abilities[index];
+    payCost(player, ability.cost);
+    player.usedAbilitiesThisTurn[ability.abilityId] = true;
+    updateDisplay(`💫 ${getPlayerLabel(player)}（AI）が能力発動：${ability.text}`);
+
+    const defender = (player === myPlayer) ? opponent : myPlayer;
+    await applyCardEffect(ability.effectId, ability.params, player, defender);
+    await checkTrapTriggers('opponentUsesAbility', defender, player);
+    refreshFieldDisplay(player);
+    refreshAbilityDisplay();
+}
+
+async function playAllAffordableAiMagic(player) {
     let played = true;
     let safety = 0; // 無限ループ防止
     while (played && safety < 20) {
@@ -56,7 +119,7 @@ function playAllAffordableAiMagic(player) {
         safety++;
         const index = findBestAiMagicIndex(player);
         if (index !== -1) {
-            useMagic(index);
+            await useMagic(index);
             played = true;
         }
     }

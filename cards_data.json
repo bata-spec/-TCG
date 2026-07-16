@@ -397,13 +397,13 @@
     "type": "マジック",
     "rank": "II",
     "rarity": "N",
-    "cost": 2,
+    "cost": 1,
     "effectId": "MS_DRAW",
     "abilityType": "active",
     "params": {
       "n": 2
     },
-    "text": "コストを2使用しカードを2枚ドローする。",
+    "text": "コストを1使用しカードを2枚ドローする。",
     "flavor": "小さな光が導く、僅かな叡智の欠片。"
   },
   "M-012": {
@@ -412,13 +412,13 @@
     "type": "マジック",
     "rank": "II",
     "rarity": "N",
-    "cost": 2,
+    "cost": 1,
     "effectId": "MS_DMG",
     "abilityType": "active",
     "params": {
       "amount": 2
     },
-    "text": "コストを2使用し相手のキャラクターカードに2ダメージを与える。",
+    "text": "コストを1使用し相手のキャラクターカードに2ダメージを与える。",
     "flavor": "放たれた呪詛は、狙い違わず敵を貫く。"
   },
   "M-013": {
@@ -427,6 +427,156 @@
     "type": "マジック",
     "rank": "II",
     "rarity": "N",
+    "cost": 1,
+    "effectId": "MS_DMG_ALL",
+    "abilityType": "active",
+    "params": {
+      "amount": 1
+    },
+    "text": "コストを1使用し相手の全てのキャラクターカードに1ダメージを与える。",
+    "flavor": "焼き尽くす業火は、味方さえも選ばない。"
+  },
+  "M-014": {
+    "id": "M-014",
+    "name": "癒しの雫・II",
+    "type": "マジック",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "MS_HEAL",
+    "abilityType": "active",
+    "params": {
+      "amount": 4
+    },
+    "text": "コストを1使用し自分のキャラクターカードのHPを4回復する。",
+    "flavor": "涙のように零れる雫が、傷を優しく癒す。"
+  },
+  "M-015": {
+    "id": "M-015",
+    "name": "魔力の泉・II",
+    "type": "マジック",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "MS_OD_BOOST",
+    "abilityType": "active",
+    "params": {
+      "amount": 3
+    },
+    "text": "コストを1使用し自分のオドを3回復する。",
+    "flavor": "尽きぬ泉から、新たな力が湧き上がる。"
+  },
+  "M-016": {
+    "id": "M-016",
+    "name": "強奪の手・II",
+    "type": "マジック",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "MS_DISCARD_OPP",
+    "abilityType": "active",
+    "params": {
+      "n": 2
+    },
+    "text": "コストを1使用し相手の手札を2枚捨てさせる。",
+    "flavor": "闇より伸びる手は、望みを容赦なく奪い去る。"
+  },
+  "M-017": {
+    "id": "M-017",
+    "name": "封印の楔・II",
+    "type": "マジック",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "MS_SEAL_TRAP",
+    "abilityType": "active",
+    "params": {
+      "duration": 2
+    },
+    "text": "コストを1使用し相手のトラップカードを2ターンの間発動不可にする。",
+    "flavor": "打ち込まれた楔が、罠の力を封じ込める。"
+  },
+  "M-018": {
+    "id": "M-018",
+    "name": "千里眼・II",
+    "type": "マジック",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "MS_REVEAL_TRAP",
+    "abilityType": "active",
+    "params": {
+      "n": 1
+    },
+    "text": "コストを1使用し相手の伏せられたトラップを1枚まで表向きにする。",
+    "flavor": "全てを見通す瞳に、隠された謀は映らない。"
+  },
+  "M-019": {
+    "id": "M-019",
+    "name": "探求の羅針盤・II",
+    "type": "マジック",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "MS_FETCH",
+    "abilityType": "active",
+    "params": {
+      "n": 1
+    },
+    "text": "コストを1使用し山札からカードを1枚まで選び手札に加える。",
+    "flavor": "羅針盤は、求める答えへと必ず導く。"
+  },
+  "M-020": {
+    "id": "M-020",
+    "name": "破却の炎・II",
+    "type": "マジック",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "MS_DESTROY_TRAP",
+    "abilityType": "active",
+    "params": {
+      "n": 1
+    },
+    "text": "コストを1使用し相手のトラップカードを1枚まで破壊する。",
+    "flavor": "静かに燃える炎は、仕込まれた罠ごと焼き払う。"
+  },
+  "M-021": {
+    "id": "M-021",
+    "name": "知識の欠片・III",
+    "type": "マジック",
+    "rank": "III",
+    "rarity": "R",
+    "cost": 2,
+    "effectId": "MS_DRAW",
+    "abilityType": "active",
+    "params": {
+      "n": 3
+    },
+    "text": "コストを2使用しカードを3枚ドローする。",
+    "flavor": "小さな光が導く、僅かな叡智の欠片。"
+  },
+  "M-022": {
+    "id": "M-022",
+    "name": "火矢の呪・III",
+    "type": "マジック",
+    "rank": "III",
+    "rarity": "R",
+    "cost": 2,
+    "effectId": "MS_DMG",
+    "abilityType": "active",
+    "params": {
+      "amount": 3
+    },
+    "text": "コストを2使用し相手のキャラクターカードに3ダメージを与える。",
+    "flavor": "放たれた呪詛は、狙い違わず敵を貫く。"
+  },
+  "M-023": {
+    "id": "M-023",
+    "name": "業火の裁き・III",
+    "type": "マジック",
+    "rank": "III",
+    "rarity": "R",
     "cost": 2,
     "effectId": "MS_DMG_ALL",
     "abilityType": "active",
@@ -436,169 +586,19 @@
     "text": "コストを2使用し相手の全てのキャラクターカードに1ダメージを与える。",
     "flavor": "焼き尽くす業火は、味方さえも選ばない。"
   },
-  "M-014": {
-    "id": "M-014",
-    "name": "癒しの雫・II",
-    "type": "マジック",
-    "rank": "II",
-    "rarity": "N",
-    "cost": 2,
-    "effectId": "MS_HEAL",
-    "abilityType": "active",
-    "params": {
-      "amount": 4
-    },
-    "text": "コストを2使用し自分のキャラクターカードのHPを4回復する。",
-    "flavor": "涙のように零れる雫が、傷を優しく癒す。"
-  },
-  "M-015": {
-    "id": "M-015",
-    "name": "魔力の泉・II",
-    "type": "マジック",
-    "rank": "II",
-    "rarity": "N",
-    "cost": 2,
-    "effectId": "MS_OD_BOOST",
-    "abilityType": "active",
-    "params": {
-      "amount": 3
-    },
-    "text": "コストを2使用し自分のオドを3回復する。",
-    "flavor": "尽きぬ泉から、新たな力が湧き上がる。"
-  },
-  "M-016": {
-    "id": "M-016",
-    "name": "強奪の手・II",
-    "type": "マジック",
-    "rank": "II",
-    "rarity": "N",
-    "cost": 2,
-    "effectId": "MS_DISCARD_OPP",
-    "abilityType": "active",
-    "params": {
-      "n": 2
-    },
-    "text": "コストを2使用し相手の手札を2枚捨てさせる。",
-    "flavor": "闇より伸びる手は、望みを容赦なく奪い去る。"
-  },
-  "M-017": {
-    "id": "M-017",
-    "name": "封印の楔・II",
-    "type": "マジック",
-    "rank": "II",
-    "rarity": "N",
-    "cost": 2,
-    "effectId": "MS_SEAL_TRAP",
-    "abilityType": "active",
-    "params": {
-      "duration": 2
-    },
-    "text": "コストを2使用し相手のトラップカードを2ターンの間発動不可にする。",
-    "flavor": "打ち込まれた楔が、罠の力を封じ込める。"
-  },
-  "M-018": {
-    "id": "M-018",
-    "name": "千里眼・II",
-    "type": "マジック",
-    "rank": "II",
-    "rarity": "N",
-    "cost": 2,
-    "effectId": "MS_REVEAL_TRAP",
-    "abilityType": "active",
-    "params": {
-      "n": 1
-    },
-    "text": "コストを2使用し相手の伏せられたトラップを1枚まで表向きにする。",
-    "flavor": "全てを見通す瞳に、隠された謀は映らない。"
-  },
-  "M-019": {
-    "id": "M-019",
-    "name": "探求の羅針盤・II",
-    "type": "マジック",
-    "rank": "II",
-    "rarity": "N",
-    "cost": 2,
-    "effectId": "MS_FETCH",
-    "abilityType": "active",
-    "params": {
-      "n": 1
-    },
-    "text": "コストを2使用し山札からカードを1枚まで選び手札に加える。",
-    "flavor": "羅針盤は、求める答えへと必ず導く。"
-  },
-  "M-020": {
-    "id": "M-020",
-    "name": "破却の炎・II",
-    "type": "マジック",
-    "rank": "II",
-    "rarity": "N",
-    "cost": 2,
-    "effectId": "MS_DESTROY_TRAP",
-    "abilityType": "active",
-    "params": {
-      "n": 1
-    },
-    "text": "コストを2使用し相手のトラップカードを1枚まで破壊する。",
-    "flavor": "静かに燃える炎は、仕込まれた罠ごと焼き払う。"
-  },
-  "M-021": {
-    "id": "M-021",
-    "name": "知識の欠片・III",
-    "type": "マジック",
-    "rank": "III",
-    "rarity": "R",
-    "cost": 3,
-    "effectId": "MS_DRAW",
-    "abilityType": "active",
-    "params": {
-      "n": 3
-    },
-    "text": "コストを3使用しカードを3枚ドローする。",
-    "flavor": "小さな光が導く、僅かな叡智の欠片。"
-  },
-  "M-022": {
-    "id": "M-022",
-    "name": "火矢の呪・III",
-    "type": "マジック",
-    "rank": "III",
-    "rarity": "R",
-    "cost": 3,
-    "effectId": "MS_DMG",
-    "abilityType": "active",
-    "params": {
-      "amount": 3
-    },
-    "text": "コストを3使用し相手のキャラクターカードに3ダメージを与える。",
-    "flavor": "放たれた呪詛は、狙い違わず敵を貫く。"
-  },
-  "M-023": {
-    "id": "M-023",
-    "name": "業火の裁き・III",
-    "type": "マジック",
-    "rank": "III",
-    "rarity": "R",
-    "cost": 3,
-    "effectId": "MS_DMG_ALL",
-    "abilityType": "active",
-    "params": {
-      "amount": 1
-    },
-    "text": "コストを3使用し相手の全てのキャラクターカードに1ダメージを与える。",
-    "flavor": "焼き尽くす業火は、味方さえも選ばない。"
-  },
   "M-024": {
     "id": "M-024",
     "name": "癒しの雫・III",
     "type": "マジック",
     "rank": "III",
     "rarity": "R",
-    "cost": 3,
+    "cost": 2,
     "effectId": "MS_HEAL",
     "abilityType": "active",
     "params": {
       "amount": 6
     },
-    "text": "コストを3使用し自分のキャラクターカードのHPを6回復する。",
+    "text": "コストを2使用し自分のキャラクターカードのHPを6回復する。",
     "flavor": "涙のように零れる雫が、傷を優しく癒す。"
   },
   "M-025": {
@@ -607,13 +607,13 @@
     "type": "マジック",
     "rank": "III",
     "rarity": "R",
-    "cost": 3,
+    "cost": 2,
     "effectId": "MS_OD_BOOST",
     "abilityType": "active",
     "params": {
       "amount": 4
     },
-    "text": "コストを3使用し自分のオドを4回復する。",
+    "text": "コストを2使用し自分のオドを4回復する。",
     "flavor": "尽きぬ泉から、新たな力が湧き上がる。"
   },
   "M-026": {
@@ -622,13 +622,13 @@
     "type": "マジック",
     "rank": "III",
     "rarity": "R",
-    "cost": 3,
+    "cost": 2,
     "effectId": "MS_DISCARD_OPP",
     "abilityType": "active",
     "params": {
       "n": 3
     },
-    "text": "コストを3使用し相手の手札を3枚捨てさせる。",
+    "text": "コストを2使用し相手の手札を3枚捨てさせる。",
     "flavor": "闇より伸びる手は、望みを容赦なく奪い去る。"
   },
   "M-027": {
@@ -637,13 +637,13 @@
     "type": "マジック",
     "rank": "III",
     "rarity": "R",
-    "cost": 3,
+    "cost": 2,
     "effectId": "MS_SEAL_TRAP",
     "abilityType": "active",
     "params": {
       "duration": 3
     },
-    "text": "コストを3使用し相手のトラップカードを3ターンの間発動不可にする。",
+    "text": "コストを2使用し相手のトラップカードを3ターンの間発動不可にする。",
     "flavor": "打ち込まれた楔が、罠の力を封じ込める。"
   },
   "M-028": {
@@ -652,13 +652,13 @@
     "type": "マジック",
     "rank": "III",
     "rarity": "R",
-    "cost": 3,
+    "cost": 2,
     "effectId": "MS_REVEAL_TRAP",
     "abilityType": "active",
     "params": {
       "n": 2
     },
-    "text": "コストを3使用し相手の伏せられたトラップを2枚まで表向きにする。",
+    "text": "コストを2使用し相手の伏せられたトラップを2枚まで表向きにする。",
     "flavor": "全てを見通す瞳に、隠された謀は映らない。"
   },
   "M-029": {
@@ -667,13 +667,13 @@
     "type": "マジック",
     "rank": "III",
     "rarity": "R",
-    "cost": 3,
+    "cost": 2,
     "effectId": "MS_FETCH",
     "abilityType": "active",
     "params": {
       "n": 2
     },
-    "text": "コストを3使用し山札からカードを2枚まで選び手札に加える。",
+    "text": "コストを2使用し山札からカードを2枚まで選び手札に加える。",
     "flavor": "羅針盤は、求める答えへと必ず導く。"
   },
   "M-030": {
@@ -682,13 +682,13 @@
     "type": "マジック",
     "rank": "III",
     "rarity": "R",
-    "cost": 3,
+    "cost": 2,
     "effectId": "MS_DESTROY_TRAP",
     "abilityType": "active",
     "params": {
       "n": 2
     },
-    "text": "コストを3使用し相手のトラップカードを2枚まで破壊する。",
+    "text": "コストを2使用し相手のトラップカードを2枚まで破壊する。",
     "flavor": "静かに燃える炎は、仕込まれた罠ごと焼き払う。"
   },
   "M-031": {
@@ -697,13 +697,13 @@
     "type": "マジック",
     "rank": "IV",
     "rarity": "SR",
-    "cost": 4,
+    "cost": 2,
     "effectId": "MS_DRAW",
     "abilityType": "active",
     "params": {
       "n": 4
     },
-    "text": "コストを4使用しカードを4枚ドローする。",
+    "text": "コストを2使用しカードを4枚ドローする。",
     "flavor": "小さな光が導く、僅かな叡智の欠片。"
   },
   "M-032": {
@@ -712,13 +712,13 @@
     "type": "マジック",
     "rank": "IV",
     "rarity": "SR",
-    "cost": 4,
+    "cost": 2,
     "effectId": "MS_DMG",
     "abilityType": "active",
     "params": {
       "amount": 4
     },
-    "text": "コストを4使用し相手のキャラクターカードに4ダメージを与える。",
+    "text": "コストを2使用し相手のキャラクターカードに4ダメージを与える。",
     "flavor": "放たれた呪詛は、狙い違わず敵を貫く。"
   },
   "M-033": {
@@ -727,13 +727,13 @@
     "type": "マジック",
     "rank": "IV",
     "rarity": "SR",
-    "cost": 4,
+    "cost": 2,
     "effectId": "MS_DMG_ALL",
     "abilityType": "active",
     "params": {
       "amount": 2
     },
-    "text": "コストを4使用し相手の全てのキャラクターカードに2ダメージを与える。",
+    "text": "コストを2使用し相手の全てのキャラクターカードに2ダメージを与える。",
     "flavor": "焼き尽くす業火は、味方さえも選ばない。"
   },
   "M-034": {
@@ -742,13 +742,13 @@
     "type": "マジック",
     "rank": "IV",
     "rarity": "SR",
-    "cost": 4,
+    "cost": 2,
     "effectId": "MS_HEAL",
     "abilityType": "active",
     "params": {
       "amount": 8
     },
-    "text": "コストを4使用し自分のキャラクターカードのHPを8回復する。",
+    "text": "コストを2使用し自分のキャラクターカードのHPを8回復する。",
     "flavor": "涙のように零れる雫が、傷を優しく癒す。"
   },
   "M-035": {
@@ -757,13 +757,13 @@
     "type": "マジック",
     "rank": "IV",
     "rarity": "SR",
-    "cost": 4,
+    "cost": 2,
     "effectId": "MS_OD_BOOST",
     "abilityType": "active",
     "params": {
       "amount": 5
     },
-    "text": "コストを4使用し自分のオドを5回復する。",
+    "text": "コストを2使用し自分のオドを5回復する。",
     "flavor": "尽きぬ泉から、新たな力が湧き上がる。"
   },
   "M-036": {
@@ -772,13 +772,13 @@
     "type": "マジック",
     "rank": "IV",
     "rarity": "SR",
-    "cost": 4,
+    "cost": 2,
     "effectId": "MS_DISCARD_OPP",
     "abilityType": "active",
     "params": {
       "n": 4
     },
-    "text": "コストを4使用し相手の手札を4枚捨てさせる。",
+    "text": "コストを2使用し相手の手札を4枚捨てさせる。",
     "flavor": "闇より伸びる手は、望みを容赦なく奪い去る。"
   },
   "M-037": {
@@ -787,13 +787,13 @@
     "type": "マジック",
     "rank": "IV",
     "rarity": "SR",
-    "cost": 4,
+    "cost": 2,
     "effectId": "MS_SEAL_TRAP",
     "abilityType": "active",
     "params": {
       "duration": 4
     },
-    "text": "コストを4使用し相手のトラップカードを4ターンの間発動不可にする。",
+    "text": "コストを2使用し相手のトラップカードを4ターンの間発動不可にする。",
     "flavor": "打ち込まれた楔が、罠の力を封じ込める。"
   },
   "M-038": {
@@ -802,13 +802,13 @@
     "type": "マジック",
     "rank": "IV",
     "rarity": "SR",
-    "cost": 4,
+    "cost": 2,
     "effectId": "MS_REVEAL_TRAP",
     "abilityType": "active",
     "params": {
       "n": 2
     },
-    "text": "コストを4使用し相手の伏せられたトラップを2枚まで表向きにする。",
+    "text": "コストを2使用し相手の伏せられたトラップを2枚まで表向きにする。",
     "flavor": "全てを見通す瞳に、隠された謀は映らない。"
   },
   "M-039": {
@@ -817,13 +817,13 @@
     "type": "マジック",
     "rank": "IV",
     "rarity": "SR",
-    "cost": 4,
+    "cost": 2,
     "effectId": "MS_FETCH",
     "abilityType": "active",
     "params": {
       "n": 2
     },
-    "text": "コストを4使用し山札からカードを2枚まで選び手札に加える。",
+    "text": "コストを2使用し山札からカードを2枚まで選び手札に加える。",
     "flavor": "羅針盤は、求める答えへと必ず導く。"
   },
   "M-040": {
@@ -832,13 +832,13 @@
     "type": "マジック",
     "rank": "IV",
     "rarity": "SR",
-    "cost": 4,
+    "cost": 2,
     "effectId": "MS_DESTROY_TRAP",
     "abilityType": "active",
     "params": {
       "n": 2
     },
-    "text": "コストを4使用し相手のトラップカードを2枚まで破壊する。",
+    "text": "コストを2使用し相手のトラップカードを2枚まで破壊する。",
     "flavor": "静かに燃える炎は、仕込まれた罠ごと焼き払う。"
   },
   "M-041": {
@@ -847,13 +847,13 @@
     "type": "マジック",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "MS_DRAW",
     "abilityType": "active",
     "params": {
       "n": 5
     },
-    "text": "コストを5使用しカードを5枚ドローする。",
+    "text": "コストを3使用しカードを5枚ドローする。",
     "flavor": "小さな光が導く、僅かな叡智の欠片。"
   },
   "M-042": {
@@ -862,13 +862,13 @@
     "type": "マジック",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "MS_DMG",
     "abilityType": "active",
     "params": {
       "amount": 5
     },
-    "text": "コストを5使用し相手のキャラクターカードに5ダメージを与える。",
+    "text": "コストを3使用し相手のキャラクターカードに5ダメージを与える。",
     "flavor": "放たれた呪詛は、狙い違わず敵を貫く。"
   },
   "M-043": {
@@ -877,13 +877,13 @@
     "type": "マジック",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "MS_DMG_ALL",
     "abilityType": "active",
     "params": {
       "amount": 2
     },
-    "text": "コストを5使用し相手の全てのキャラクターカードに2ダメージを与える。",
+    "text": "コストを3使用し相手の全てのキャラクターカードに2ダメージを与える。",
     "flavor": "焼き尽くす業火は、味方さえも選ばない。"
   },
   "M-044": {
@@ -892,13 +892,13 @@
     "type": "マジック",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "MS_HEAL",
     "abilityType": "active",
     "params": {
       "amount": 10
     },
-    "text": "コストを5使用し自分のキャラクターカードのHPを10回復する。",
+    "text": "コストを3使用し自分のキャラクターカードのHPを10回復する。",
     "flavor": "涙のように零れる雫が、傷を優しく癒す。"
   },
   "M-045": {
@@ -907,13 +907,13 @@
     "type": "マジック",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 2,
     "effectId": "MS_OD_BOOST",
     "abilityType": "active",
     "params": {
       "amount": 6
     },
-    "text": "コストを5使用し自分のオドを6回復する。",
+    "text": "コストを2使用し自分のオドを6回復する。",
     "flavor": "尽きぬ泉から、新たな力が湧き上がる。"
   },
   "M-046": {
@@ -922,13 +922,13 @@
     "type": "マジック",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "MS_DISCARD_OPP",
     "abilityType": "active",
     "params": {
       "n": 5
     },
-    "text": "コストを5使用し相手の手札を5枚捨てさせる。",
+    "text": "コストを3使用し相手の手札を5枚捨てさせる。",
     "flavor": "闇より伸びる手は、望みを容赦なく奪い去る。"
   },
   "M-047": {
@@ -937,13 +937,13 @@
     "type": "マジック",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "MS_SEAL_TRAP",
     "abilityType": "active",
     "params": {
       "duration": 5
     },
-    "text": "コストを5使用し相手のトラップカードを5ターンの間発動不可にする。",
+    "text": "コストを3使用し相手のトラップカードを5ターンの間発動不可にする。",
     "flavor": "打ち込まれた楔が、罠の力を封じ込める。"
   },
   "M-048": {
@@ -952,13 +952,13 @@
     "type": "マジック",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "MS_REVEAL_TRAP",
     "abilityType": "active",
     "params": {
       "n": 3
     },
-    "text": "コストを5使用し相手の伏せられたトラップを3枚まで表向きにする。",
+    "text": "コストを3使用し相手の伏せられたトラップを3枚まで表向きにする。",
     "flavor": "全てを見通す瞳に、隠された謀は映らない。"
   },
   "M-049": {
@@ -967,13 +967,13 @@
     "type": "マジック",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "MS_FETCH",
     "abilityType": "active",
     "params": {
       "n": 3
     },
-    "text": "コストを5使用し山札からカードを3枚まで選び手札に加える。",
+    "text": "コストを3使用し山札からカードを3枚まで選び手札に加える。",
     "flavor": "羅針盤は、求める答えへと必ず導く。"
   },
   "M-050": {
@@ -982,13 +982,13 @@
     "type": "マジック",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "MS_DESTROY_TRAP",
     "abilityType": "active",
     "params": {
       "n": 3
     },
-    "text": "コストを5使用し相手のトラップカードを3枚まで破壊する。",
+    "text": "コストを3使用し相手のトラップカードを3枚まで破壊する。",
     "flavor": "静かに燃える炎は、仕込まれた罠ごと焼き払う。"
   },
   "T-001": {
@@ -1155,13 +1155,13 @@
     "type": "トラップ",
     "rank": "II",
     "rarity": "N",
-    "cost": 2,
+    "cost": 1,
     "effectId": "TS_DRAW",
     "abilityType": "active",
     "params": {
       "n": 2
     },
-    "text": "コストを2使用しカードを2枚ドローする。",
+    "text": "コストを1使用しカードを2枚ドローする。",
     "flavor": "未来を見通す罠は、静かに機を待つ。"
   },
   "T-012": {
@@ -1170,13 +1170,13 @@
     "type": "トラップ",
     "rank": "II",
     "rarity": "N",
-    "cost": 2,
+    "cost": 1,
     "effectId": "TS_REDUCE_DMG",
     "abilityType": "active",
     "params": {
       "amount": 2
     },
-    "text": "コストを2使用し自分のキャラクターカードが受けるダメージを2軽減する。",
+    "text": "コストを1使用し自分のキャラクターカードが受けるダメージを2軽減する。",
     "flavor": "見えざる盾が、迫る一撃を防ぎ止める。"
   },
   "T-013": {
@@ -1185,13 +1185,13 @@
     "type": "トラップ",
     "rank": "II",
     "rarity": "N",
-    "cost": 2,
+    "cost": 1,
     "effectId": "TS_COUNTER",
     "abilityType": "triggered",
     "params": {
       "amount": 2
     },
-    "text": "相手の攻撃時、コストを2使用し相手のキャラクターカードに2ダメージを反射する。",
+    "text": "相手の攻撃時、コストを1使用し相手のキャラクターカードに2ダメージを反射する。",
     "flavor": "受けた痛みは、そのまま刃となって返る。",
     "trigger": "opponentAttacks"
   },
@@ -1201,6 +1201,164 @@
     "type": "トラップ",
     "rank": "II",
     "rarity": "N",
+    "cost": 1,
+    "effectId": "TS_NEGATE_MAGIC",
+    "abilityType": "triggered",
+    "params": {
+      "maxCost": 1
+    },
+    "text": "相手がコスト1以下のマジックカードを発動した時、コストを1使用しその発動を無効にする。",
+    "flavor": "結界に触れた魔法は、力を失い霧散する。",
+    "trigger": "opponentActivatesMagic"
+  },
+  "T-015": {
+    "id": "T-015",
+    "name": "破約の鎖・II",
+    "type": "トラップ",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "TS_NEGATE_TRAP",
+    "abilityType": "triggered",
+    "params": {
+      "maxCost": 1
+    },
+    "text": "相手がコスト1以下のトラップカードを発動した時、コストを1使用しその発動を無効にする。",
+    "flavor": "鎖に絡めとられた謀は、二度と発動しない。",
+    "trigger": "opponentActivatesTrap"
+  },
+  "T-016": {
+    "id": "T-016",
+    "name": "混乱の霧・II",
+    "type": "トラップ",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "TS_FORCE_DISCARD",
+    "abilityType": "triggered",
+    "params": {
+      "n": 1
+    },
+    "text": "相手のドロー時、コストを1使用し相手の手札を1枚捨てさせる。",
+    "flavor": "立ち込める霧は、正しい判断を狂わせる。",
+    "trigger": "opponentDraws"
+  },
+  "T-017": {
+    "id": "T-017",
+    "name": "再生の泉・II",
+    "type": "トラップ",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "TS_HEAL",
+    "abilityType": "triggered",
+    "params": {
+      "amount": 2
+    },
+    "text": "自分のキャラクターカードがダメージを受けた時、コストを1使用しHPを2回復する。",
+    "flavor": "傷ついた分だけ、泉は静かに癒しを与える。",
+    "trigger": "selfTakesDamage"
+  },
+  "T-018": {
+    "id": "T-018",
+    "name": "吸魂の罠・II",
+    "type": "トラップ",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "TS_OD_DRAIN",
+    "abilityType": "triggered",
+    "params": {
+      "amount": 2
+    },
+    "text": "相手が能力を発動した時、コストを1使用し相手のオドを2減少させる。",
+    "flavor": "使われた力の残滓を、罠が静かに吸い上げる。",
+    "trigger": "opponentUsesAbility"
+  },
+  "T-019": {
+    "id": "T-019",
+    "name": "沈黙の封・II",
+    "type": "トラップ",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "TS_SEAL_ABILITY",
+    "abilityType": "triggered",
+    "params": {
+      "duration": 2
+    },
+    "text": "相手が能力を発動した時、コストを1使用しその能力を2ターンの間封印する。",
+    "flavor": "声を奪われた力は、しばし沈黙を強いられる。",
+    "trigger": "opponentUsesAbility"
+  },
+  "T-020": {
+    "id": "T-020",
+    "name": "身代わりの影・II",
+    "type": "トラップ",
+    "rank": "II",
+    "rarity": "N",
+    "cost": 1,
+    "effectId": "TS_REFLECT_SEAL",
+    "abilityType": "triggered",
+    "params": {
+      "uses": 1
+    },
+    "text": "自分のキャラクターカードが破壊される時、コストを1使用し1度だけ破壊を無効にする。",
+    "flavor": "影が身代わりとなり、消えゆく運命を退ける。",
+    "trigger": "selfWouldBeDestroyed"
+  },
+  "T-021": {
+    "id": "T-021",
+    "name": "予見の罠・III",
+    "type": "トラップ",
+    "rank": "III",
+    "rarity": "R",
+    "cost": 2,
+    "effectId": "TS_DRAW",
+    "abilityType": "active",
+    "params": {
+      "n": 3
+    },
+    "text": "コストを2使用しカードを3枚ドローする。",
+    "flavor": "未来を見通す罠は、静かに機を待つ。"
+  },
+  "T-022": {
+    "id": "T-022",
+    "name": "守りの盾・III",
+    "type": "トラップ",
+    "rank": "III",
+    "rarity": "R",
+    "cost": 2,
+    "effectId": "TS_REDUCE_DMG",
+    "abilityType": "active",
+    "params": {
+      "amount": 3
+    },
+    "text": "コストを2使用し自分のキャラクターカードが受けるダメージを3軽減する。",
+    "flavor": "見えざる盾が、迫る一撃を防ぎ止める。"
+  },
+  "T-023": {
+    "id": "T-023",
+    "name": "反撃の刃・III",
+    "type": "トラップ",
+    "rank": "III",
+    "rarity": "R",
+    "cost": 2,
+    "effectId": "TS_COUNTER",
+    "abilityType": "triggered",
+    "params": {
+      "amount": 3
+    },
+    "text": "相手の攻撃時、コストを2使用し相手のキャラクターカードに3ダメージを反射する。",
+    "flavor": "受けた痛みは、そのまま刃となって返る。",
+    "trigger": "opponentAttacks"
+  },
+  "T-024": {
+    "id": "T-024",
+    "name": "無効の結界・III",
+    "type": "トラップ",
+    "rank": "III",
+    "rarity": "R",
     "cost": 2,
     "effectId": "TS_NEGATE_MAGIC",
     "abilityType": "triggered",
@@ -1211,12 +1369,12 @@
     "flavor": "結界に触れた魔法は、力を失い霧散する。",
     "trigger": "opponentActivatesMagic"
   },
-  "T-015": {
-    "id": "T-015",
-    "name": "破約の鎖・II",
+  "T-025": {
+    "id": "T-025",
+    "name": "破約の鎖・III",
     "type": "トラップ",
-    "rank": "II",
-    "rarity": "N",
+    "rank": "III",
+    "rarity": "R",
     "cost": 2,
     "effectId": "TS_NEGATE_TRAP",
     "abilityType": "triggered",
@@ -1227,76 +1385,76 @@
     "flavor": "鎖に絡めとられた謀は、二度と発動しない。",
     "trigger": "opponentActivatesTrap"
   },
-  "T-016": {
-    "id": "T-016",
-    "name": "混乱の霧・II",
+  "T-026": {
+    "id": "T-026",
+    "name": "混乱の霧・III",
     "type": "トラップ",
-    "rank": "II",
-    "rarity": "N",
+    "rank": "III",
+    "rarity": "R",
     "cost": 2,
     "effectId": "TS_FORCE_DISCARD",
     "abilityType": "triggered",
     "params": {
-      "n": 1
+      "n": 2
     },
-    "text": "相手のドロー時、コストを2使用し相手の手札を1枚捨てさせる。",
+    "text": "相手のドロー時、コストを2使用し相手の手札を2枚捨てさせる。",
     "flavor": "立ち込める霧は、正しい判断を狂わせる。",
     "trigger": "opponentDraws"
   },
-  "T-017": {
-    "id": "T-017",
-    "name": "再生の泉・II",
+  "T-027": {
+    "id": "T-027",
+    "name": "再生の泉・III",
     "type": "トラップ",
-    "rank": "II",
-    "rarity": "N",
+    "rank": "III",
+    "rarity": "R",
     "cost": 2,
     "effectId": "TS_HEAL",
     "abilityType": "triggered",
     "params": {
-      "amount": 2
+      "amount": 3
     },
-    "text": "自分のキャラクターカードがダメージを受けた時、コストを2使用しHPを2回復する。",
+    "text": "自分のキャラクターカードがダメージを受けた時、コストを2使用しHPを3回復する。",
     "flavor": "傷ついた分だけ、泉は静かに癒しを与える。",
     "trigger": "selfTakesDamage"
   },
-  "T-018": {
-    "id": "T-018",
-    "name": "吸魂の罠・II",
+  "T-028": {
+    "id": "T-028",
+    "name": "吸魂の罠・III",
     "type": "トラップ",
-    "rank": "II",
-    "rarity": "N",
+    "rank": "III",
+    "rarity": "R",
     "cost": 2,
     "effectId": "TS_OD_DRAIN",
     "abilityType": "triggered",
     "params": {
-      "amount": 2
+      "amount": 3
     },
-    "text": "相手が能力を発動した時、コストを2使用し相手のオドを2減少させる。",
+    "text": "相手が能力を発動した時、コストを2使用し相手のオドを3減少させる。",
     "flavor": "使われた力の残滓を、罠が静かに吸い上げる。",
     "trigger": "opponentUsesAbility"
   },
-  "T-019": {
-    "id": "T-019",
-    "name": "沈黙の封・II",
+  "T-029": {
+    "id": "T-029",
+    "name": "沈黙の封・III",
     "type": "トラップ",
-    "rank": "II",
-    "rarity": "N",
+    "rank": "III",
+    "rarity": "R",
     "cost": 2,
     "effectId": "TS_SEAL_ABILITY",
     "abilityType": "triggered",
     "params": {
-      "duration": 2
+      "duration": 3
     },
-    "text": "相手が能力を発動した時、コストを2使用しその能力を2ターンの間封印する。",
+    "text": "相手が能力を発動した時、コストを2使用しその能力を3ターンの間封印する。",
     "flavor": "声を奪われた力は、しばし沈黙を強いられる。",
     "trigger": "opponentUsesAbility"
   },
-  "T-020": {
-    "id": "T-020",
-    "name": "身代わりの影・II",
+  "T-030": {
+    "id": "T-030",
+    "name": "身代わりの影・III",
     "type": "トラップ",
-    "rank": "II",
-    "rarity": "N",
+    "rank": "III",
+    "rarity": "R",
     "cost": 2,
     "effectId": "TS_REFLECT_SEAL",
     "abilityType": "triggered",
@@ -1307,58 +1465,216 @@
     "flavor": "影が身代わりとなり、消えゆく運命を退ける。",
     "trigger": "selfWouldBeDestroyed"
   },
-  "T-021": {
-    "id": "T-021",
-    "name": "予見の罠・III",
+  "T-031": {
+    "id": "T-031",
+    "name": "予見の罠・IV",
     "type": "トラップ",
-    "rank": "III",
-    "rarity": "R",
+    "rank": "IV",
+    "rarity": "SR",
+    "cost": 2,
+    "effectId": "TS_DRAW",
+    "abilityType": "active",
+    "params": {
+      "n": 4
+    },
+    "text": "コストを2使用しカードを4枚ドローする。",
+    "flavor": "未来を見通す罠は、静かに機を待つ。"
+  },
+  "T-032": {
+    "id": "T-032",
+    "name": "守りの盾・IV",
+    "type": "トラップ",
+    "rank": "IV",
+    "rarity": "SR",
+    "cost": 2,
+    "effectId": "TS_REDUCE_DMG",
+    "abilityType": "active",
+    "params": {
+      "amount": 4
+    },
+    "text": "コストを2使用し自分のキャラクターカードが受けるダメージを4軽減する。",
+    "flavor": "見えざる盾が、迫る一撃を防ぎ止める。"
+  },
+  "T-033": {
+    "id": "T-033",
+    "name": "反撃の刃・IV",
+    "type": "トラップ",
+    "rank": "IV",
+    "rarity": "SR",
+    "cost": 2,
+    "effectId": "TS_COUNTER",
+    "abilityType": "triggered",
+    "params": {
+      "amount": 4
+    },
+    "text": "相手の攻撃時、コストを2使用し相手のキャラクターカードに4ダメージを反射する。",
+    "flavor": "受けた痛みは、そのまま刃となって返る。",
+    "trigger": "opponentAttacks"
+  },
+  "T-034": {
+    "id": "T-034",
+    "name": "無効の結界・IV",
+    "type": "トラップ",
+    "rank": "IV",
+    "rarity": "SR",
+    "cost": 2,
+    "effectId": "TS_NEGATE_MAGIC",
+    "abilityType": "triggered",
+    "params": {
+      "maxCost": 2
+    },
+    "text": "相手がコスト2以下のマジックカードを発動した時、コストを2使用しその発動を無効にする。",
+    "flavor": "結界に触れた魔法は、力を失い霧散する。",
+    "trigger": "opponentActivatesMagic"
+  },
+  "T-035": {
+    "id": "T-035",
+    "name": "破約の鎖・IV",
+    "type": "トラップ",
+    "rank": "IV",
+    "rarity": "SR",
+    "cost": 2,
+    "effectId": "TS_NEGATE_TRAP",
+    "abilityType": "triggered",
+    "params": {
+      "maxCost": 2
+    },
+    "text": "相手がコスト2以下のトラップカードを発動した時、コストを2使用しその発動を無効にする。",
+    "flavor": "鎖に絡めとられた謀は、二度と発動しない。",
+    "trigger": "opponentActivatesTrap"
+  },
+  "T-036": {
+    "id": "T-036",
+    "name": "混乱の霧・IV",
+    "type": "トラップ",
+    "rank": "IV",
+    "rarity": "SR",
+    "cost": 2,
+    "effectId": "TS_FORCE_DISCARD",
+    "abilityType": "triggered",
+    "params": {
+      "n": 2
+    },
+    "text": "相手のドロー時、コストを2使用し相手の手札を2枚捨てさせる。",
+    "flavor": "立ち込める霧は、正しい判断を狂わせる。",
+    "trigger": "opponentDraws"
+  },
+  "T-037": {
+    "id": "T-037",
+    "name": "再生の泉・IV",
+    "type": "トラップ",
+    "rank": "IV",
+    "rarity": "SR",
+    "cost": 2,
+    "effectId": "TS_HEAL",
+    "abilityType": "triggered",
+    "params": {
+      "amount": 4
+    },
+    "text": "自分のキャラクターカードがダメージを受けた時、コストを2使用しHPを4回復する。",
+    "flavor": "傷ついた分だけ、泉は静かに癒しを与える。",
+    "trigger": "selfTakesDamage"
+  },
+  "T-038": {
+    "id": "T-038",
+    "name": "吸魂の罠・IV",
+    "type": "トラップ",
+    "rank": "IV",
+    "rarity": "SR",
+    "cost": 2,
+    "effectId": "TS_OD_DRAIN",
+    "abilityType": "triggered",
+    "params": {
+      "amount": 4
+    },
+    "text": "相手が能力を発動した時、コストを2使用し相手のオドを4減少させる。",
+    "flavor": "使われた力の残滓を、罠が静かに吸い上げる。",
+    "trigger": "opponentUsesAbility"
+  },
+  "T-039": {
+    "id": "T-039",
+    "name": "沈黙の封・IV",
+    "type": "トラップ",
+    "rank": "IV",
+    "rarity": "SR",
+    "cost": 2,
+    "effectId": "TS_SEAL_ABILITY",
+    "abilityType": "triggered",
+    "params": {
+      "duration": 4
+    },
+    "text": "相手が能力を発動した時、コストを2使用しその能力を4ターンの間封印する。",
+    "flavor": "声を奪われた力は、しばし沈黙を強いられる。",
+    "trigger": "opponentUsesAbility"
+  },
+  "T-040": {
+    "id": "T-040",
+    "name": "身代わりの影・IV",
+    "type": "トラップ",
+    "rank": "IV",
+    "rarity": "SR",
+    "cost": 2,
+    "effectId": "TS_REFLECT_SEAL",
+    "abilityType": "triggered",
+    "params": {
+      "uses": 1
+    },
+    "text": "自分のキャラクターカードが破壊される時、コストを2使用し1度だけ破壊を無効にする。",
+    "flavor": "影が身代わりとなり、消えゆく運命を退ける。",
+    "trigger": "selfWouldBeDestroyed"
+  },
+  "T-041": {
+    "id": "T-041",
+    "name": "予見の罠・V",
+    "type": "トラップ",
+    "rank": "V",
+    "rarity": "UR",
     "cost": 3,
     "effectId": "TS_DRAW",
     "abilityType": "active",
     "params": {
-      "n": 3
+      "n": 5
     },
-    "text": "コストを3使用しカードを3枚ドローする。",
+    "text": "コストを3使用しカードを5枚ドローする。",
     "flavor": "未来を見通す罠は、静かに機を待つ。"
   },
-  "T-022": {
-    "id": "T-022",
-    "name": "守りの盾・III",
+  "T-042": {
+    "id": "T-042",
+    "name": "守りの盾・V",
     "type": "トラップ",
-    "rank": "III",
-    "rarity": "R",
+    "rank": "V",
+    "rarity": "UR",
     "cost": 3,
     "effectId": "TS_REDUCE_DMG",
     "abilityType": "active",
     "params": {
-      "amount": 3
+      "amount": 5
     },
-    "text": "コストを3使用し自分のキャラクターカードが受けるダメージを3軽減する。",
+    "text": "コストを3使用し自分のキャラクターカードが受けるダメージを5軽減する。",
     "flavor": "見えざる盾が、迫る一撃を防ぎ止める。"
   },
-  "T-023": {
-    "id": "T-023",
-    "name": "反撃の刃・III",
+  "T-043": {
+    "id": "T-043",
+    "name": "反撃の刃・V",
     "type": "トラップ",
-    "rank": "III",
-    "rarity": "R",
+    "rank": "V",
+    "rarity": "UR",
     "cost": 3,
     "effectId": "TS_COUNTER",
     "abilityType": "triggered",
     "params": {
-      "amount": 3
+      "amount": 5
     },
-    "text": "相手の攻撃時、コストを3使用し相手のキャラクターカードに3ダメージを反射する。",
+    "text": "相手の攻撃時、コストを3使用し相手のキャラクターカードに5ダメージを反射する。",
     "flavor": "受けた痛みは、そのまま刃となって返る。",
     "trigger": "opponentAttacks"
   },
-  "T-024": {
-    "id": "T-024",
-    "name": "無効の結界・III",
+  "T-044": {
+    "id": "T-044",
+    "name": "無効の結界・V",
     "type": "トラップ",
-    "rank": "III",
-    "rarity": "R",
+    "rank": "V",
+    "rarity": "UR",
     "cost": 3,
     "effectId": "TS_NEGATE_MAGIC",
     "abilityType": "triggered",
@@ -1369,12 +1685,12 @@
     "flavor": "結界に触れた魔法は、力を失い霧散する。",
     "trigger": "opponentActivatesMagic"
   },
-  "T-025": {
-    "id": "T-025",
-    "name": "破約の鎖・III",
+  "T-045": {
+    "id": "T-045",
+    "name": "破約の鎖・V",
     "type": "トラップ",
-    "rank": "III",
-    "rarity": "R",
+    "rank": "V",
+    "rarity": "UR",
     "cost": 3,
     "effectId": "TS_NEGATE_TRAP",
     "abilityType": "triggered",
@@ -1385,335 +1701,19 @@
     "flavor": "鎖に絡めとられた謀は、二度と発動しない。",
     "trigger": "opponentActivatesTrap"
   },
-  "T-026": {
-    "id": "T-026",
-    "name": "混乱の霧・III",
-    "type": "トラップ",
-    "rank": "III",
-    "rarity": "R",
-    "cost": 3,
-    "effectId": "TS_FORCE_DISCARD",
-    "abilityType": "triggered",
-    "params": {
-      "n": 2
-    },
-    "text": "相手のドロー時、コストを3使用し相手の手札を2枚捨てさせる。",
-    "flavor": "立ち込める霧は、正しい判断を狂わせる。",
-    "trigger": "opponentDraws"
-  },
-  "T-027": {
-    "id": "T-027",
-    "name": "再生の泉・III",
-    "type": "トラップ",
-    "rank": "III",
-    "rarity": "R",
-    "cost": 3,
-    "effectId": "TS_HEAL",
-    "abilityType": "triggered",
-    "params": {
-      "amount": 3
-    },
-    "text": "自分のキャラクターカードがダメージを受けた時、コストを3使用しHPを3回復する。",
-    "flavor": "傷ついた分だけ、泉は静かに癒しを与える。",
-    "trigger": "selfTakesDamage"
-  },
-  "T-028": {
-    "id": "T-028",
-    "name": "吸魂の罠・III",
-    "type": "トラップ",
-    "rank": "III",
-    "rarity": "R",
-    "cost": 3,
-    "effectId": "TS_OD_DRAIN",
-    "abilityType": "triggered",
-    "params": {
-      "amount": 3
-    },
-    "text": "相手が能力を発動した時、コストを3使用し相手のオドを3減少させる。",
-    "flavor": "使われた力の残滓を、罠が静かに吸い上げる。",
-    "trigger": "opponentUsesAbility"
-  },
-  "T-029": {
-    "id": "T-029",
-    "name": "沈黙の封・III",
-    "type": "トラップ",
-    "rank": "III",
-    "rarity": "R",
-    "cost": 3,
-    "effectId": "TS_SEAL_ABILITY",
-    "abilityType": "triggered",
-    "params": {
-      "duration": 3
-    },
-    "text": "相手が能力を発動した時、コストを3使用しその能力を3ターンの間封印する。",
-    "flavor": "声を奪われた力は、しばし沈黙を強いられる。",
-    "trigger": "opponentUsesAbility"
-  },
-  "T-030": {
-    "id": "T-030",
-    "name": "身代わりの影・III",
-    "type": "トラップ",
-    "rank": "III",
-    "rarity": "R",
-    "cost": 3,
-    "effectId": "TS_REFLECT_SEAL",
-    "abilityType": "triggered",
-    "params": {
-      "uses": 1
-    },
-    "text": "自分のキャラクターカードが破壊される時、コストを3使用し1度だけ破壊を無効にする。",
-    "flavor": "影が身代わりとなり、消えゆく運命を退ける。",
-    "trigger": "selfWouldBeDestroyed"
-  },
-  "T-031": {
-    "id": "T-031",
-    "name": "予見の罠・IV",
-    "type": "トラップ",
-    "rank": "IV",
-    "rarity": "SR",
-    "cost": 4,
-    "effectId": "TS_DRAW",
-    "abilityType": "active",
-    "params": {
-      "n": 4
-    },
-    "text": "コストを4使用しカードを4枚ドローする。",
-    "flavor": "未来を見通す罠は、静かに機を待つ。"
-  },
-  "T-032": {
-    "id": "T-032",
-    "name": "守りの盾・IV",
-    "type": "トラップ",
-    "rank": "IV",
-    "rarity": "SR",
-    "cost": 4,
-    "effectId": "TS_REDUCE_DMG",
-    "abilityType": "active",
-    "params": {
-      "amount": 4
-    },
-    "text": "コストを4使用し自分のキャラクターカードが受けるダメージを4軽減する。",
-    "flavor": "見えざる盾が、迫る一撃を防ぎ止める。"
-  },
-  "T-033": {
-    "id": "T-033",
-    "name": "反撃の刃・IV",
-    "type": "トラップ",
-    "rank": "IV",
-    "rarity": "SR",
-    "cost": 4,
-    "effectId": "TS_COUNTER",
-    "abilityType": "triggered",
-    "params": {
-      "amount": 4
-    },
-    "text": "相手の攻撃時、コストを4使用し相手のキャラクターカードに4ダメージを反射する。",
-    "flavor": "受けた痛みは、そのまま刃となって返る。",
-    "trigger": "opponentAttacks"
-  },
-  "T-034": {
-    "id": "T-034",
-    "name": "無効の結界・IV",
-    "type": "トラップ",
-    "rank": "IV",
-    "rarity": "SR",
-    "cost": 4,
-    "effectId": "TS_NEGATE_MAGIC",
-    "abilityType": "triggered",
-    "params": {
-      "maxCost": 4
-    },
-    "text": "相手がコスト4以下のマジックカードを発動した時、コストを4使用しその発動を無効にする。",
-    "flavor": "結界に触れた魔法は、力を失い霧散する。",
-    "trigger": "opponentActivatesMagic"
-  },
-  "T-035": {
-    "id": "T-035",
-    "name": "破約の鎖・IV",
-    "type": "トラップ",
-    "rank": "IV",
-    "rarity": "SR",
-    "cost": 4,
-    "effectId": "TS_NEGATE_TRAP",
-    "abilityType": "triggered",
-    "params": {
-      "maxCost": 4
-    },
-    "text": "相手がコスト4以下のトラップカードを発動した時、コストを4使用しその発動を無効にする。",
-    "flavor": "鎖に絡めとられた謀は、二度と発動しない。",
-    "trigger": "opponentActivatesTrap"
-  },
-  "T-036": {
-    "id": "T-036",
-    "name": "混乱の霧・IV",
-    "type": "トラップ",
-    "rank": "IV",
-    "rarity": "SR",
-    "cost": 4,
-    "effectId": "TS_FORCE_DISCARD",
-    "abilityType": "triggered",
-    "params": {
-      "n": 2
-    },
-    "text": "相手のドロー時、コストを4使用し相手の手札を2枚捨てさせる。",
-    "flavor": "立ち込める霧は、正しい判断を狂わせる。",
-    "trigger": "opponentDraws"
-  },
-  "T-037": {
-    "id": "T-037",
-    "name": "再生の泉・IV",
-    "type": "トラップ",
-    "rank": "IV",
-    "rarity": "SR",
-    "cost": 4,
-    "effectId": "TS_HEAL",
-    "abilityType": "triggered",
-    "params": {
-      "amount": 4
-    },
-    "text": "自分のキャラクターカードがダメージを受けた時、コストを4使用しHPを4回復する。",
-    "flavor": "傷ついた分だけ、泉は静かに癒しを与える。",
-    "trigger": "selfTakesDamage"
-  },
-  "T-038": {
-    "id": "T-038",
-    "name": "吸魂の罠・IV",
-    "type": "トラップ",
-    "rank": "IV",
-    "rarity": "SR",
-    "cost": 4,
-    "effectId": "TS_OD_DRAIN",
-    "abilityType": "triggered",
-    "params": {
-      "amount": 4
-    },
-    "text": "相手が能力を発動した時、コストを4使用し相手のオドを4減少させる。",
-    "flavor": "使われた力の残滓を、罠が静かに吸い上げる。",
-    "trigger": "opponentUsesAbility"
-  },
-  "T-039": {
-    "id": "T-039",
-    "name": "沈黙の封・IV",
-    "type": "トラップ",
-    "rank": "IV",
-    "rarity": "SR",
-    "cost": 4,
-    "effectId": "TS_SEAL_ABILITY",
-    "abilityType": "triggered",
-    "params": {
-      "duration": 4
-    },
-    "text": "相手が能力を発動した時、コストを4使用しその能力を4ターンの間封印する。",
-    "flavor": "声を奪われた力は、しばし沈黙を強いられる。",
-    "trigger": "opponentUsesAbility"
-  },
-  "T-040": {
-    "id": "T-040",
-    "name": "身代わりの影・IV",
-    "type": "トラップ",
-    "rank": "IV",
-    "rarity": "SR",
-    "cost": 4,
-    "effectId": "TS_REFLECT_SEAL",
-    "abilityType": "triggered",
-    "params": {
-      "uses": 1
-    },
-    "text": "自分のキャラクターカードが破壊される時、コストを4使用し1度だけ破壊を無効にする。",
-    "flavor": "影が身代わりとなり、消えゆく運命を退ける。",
-    "trigger": "selfWouldBeDestroyed"
-  },
-  "T-041": {
-    "id": "T-041",
-    "name": "予見の罠・V",
-    "type": "トラップ",
-    "rank": "V",
-    "rarity": "UR",
-    "cost": 5,
-    "effectId": "TS_DRAW",
-    "abilityType": "active",
-    "params": {
-      "n": 5
-    },
-    "text": "コストを5使用しカードを5枚ドローする。",
-    "flavor": "未来を見通す罠は、静かに機を待つ。"
-  },
-  "T-042": {
-    "id": "T-042",
-    "name": "守りの盾・V",
-    "type": "トラップ",
-    "rank": "V",
-    "rarity": "UR",
-    "cost": 5,
-    "effectId": "TS_REDUCE_DMG",
-    "abilityType": "active",
-    "params": {
-      "amount": 5
-    },
-    "text": "コストを5使用し自分のキャラクターカードが受けるダメージを5軽減する。",
-    "flavor": "見えざる盾が、迫る一撃を防ぎ止める。"
-  },
-  "T-043": {
-    "id": "T-043",
-    "name": "反撃の刃・V",
-    "type": "トラップ",
-    "rank": "V",
-    "rarity": "UR",
-    "cost": 5,
-    "effectId": "TS_COUNTER",
-    "abilityType": "triggered",
-    "params": {
-      "amount": 5
-    },
-    "text": "相手の攻撃時、コストを5使用し相手のキャラクターカードに5ダメージを反射する。",
-    "flavor": "受けた痛みは、そのまま刃となって返る。",
-    "trigger": "opponentAttacks"
-  },
-  "T-044": {
-    "id": "T-044",
-    "name": "無効の結界・V",
-    "type": "トラップ",
-    "rank": "V",
-    "rarity": "UR",
-    "cost": 5,
-    "effectId": "TS_NEGATE_MAGIC",
-    "abilityType": "triggered",
-    "params": {
-      "maxCost": 5
-    },
-    "text": "相手がコスト5以下のマジックカードを発動した時、コストを5使用しその発動を無効にする。",
-    "flavor": "結界に触れた魔法は、力を失い霧散する。",
-    "trigger": "opponentActivatesMagic"
-  },
-  "T-045": {
-    "id": "T-045",
-    "name": "破約の鎖・V",
-    "type": "トラップ",
-    "rank": "V",
-    "rarity": "UR",
-    "cost": 5,
-    "effectId": "TS_NEGATE_TRAP",
-    "abilityType": "triggered",
-    "params": {
-      "maxCost": 5
-    },
-    "text": "相手がコスト5以下のトラップカードを発動した時、コストを5使用しその発動を無効にする。",
-    "flavor": "鎖に絡めとられた謀は、二度と発動しない。",
-    "trigger": "opponentActivatesTrap"
-  },
   "T-046": {
     "id": "T-046",
     "name": "混乱の霧・V",
     "type": "トラップ",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "TS_FORCE_DISCARD",
     "abilityType": "triggered",
     "params": {
       "n": 3
     },
-    "text": "相手のドロー時、コストを5使用し相手の手札を3枚捨てさせる。",
+    "text": "相手のドロー時、コストを3使用し相手の手札を3枚捨てさせる。",
     "flavor": "立ち込める霧は、正しい判断を狂わせる。",
     "trigger": "opponentDraws"
   },
@@ -1723,13 +1723,13 @@
     "type": "トラップ",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "TS_HEAL",
     "abilityType": "triggered",
     "params": {
       "amount": 5
     },
-    "text": "自分のキャラクターカードがダメージを受けた時、コストを5使用しHPを5回復する。",
+    "text": "自分のキャラクターカードがダメージを受けた時、コストを3使用しHPを5回復する。",
     "flavor": "傷ついた分だけ、泉は静かに癒しを与える。",
     "trigger": "selfTakesDamage"
   },
@@ -1739,13 +1739,13 @@
     "type": "トラップ",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "TS_OD_DRAIN",
     "abilityType": "triggered",
     "params": {
       "amount": 5
     },
-    "text": "相手が能力を発動した時、コストを5使用し相手のオドを5減少させる。",
+    "text": "相手が能力を発動した時、コストを3使用し相手のオドを5減少させる。",
     "flavor": "使われた力の残滓を、罠が静かに吸い上げる。",
     "trigger": "opponentUsesAbility"
   },
@@ -1755,13 +1755,13 @@
     "type": "トラップ",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "TS_SEAL_ABILITY",
     "abilityType": "triggered",
     "params": {
       "duration": 5
     },
-    "text": "相手が能力を発動した時、コストを5使用しその能力を5ターンの間封印する。",
+    "text": "相手が能力を発動した時、コストを3使用しその能力を5ターンの間封印する。",
     "flavor": "声を奪われた力は、しばし沈黙を強いられる。",
     "trigger": "opponentUsesAbility"
   },
@@ -1771,13 +1771,13 @@
     "type": "トラップ",
     "rank": "V",
     "rarity": "UR",
-    "cost": 5,
+    "cost": 3,
     "effectId": "TS_REFLECT_SEAL",
     "abilityType": "triggered",
     "params": {
       "uses": 1
     },
-    "text": "自分のキャラクターカードが破壊される時、コストを5使用し1度だけ破壊を無効にする。",
+    "text": "自分のキャラクターカードが破壊される時、コストを3使用し1度だけ破壊を無効にする。",
     "flavor": "影が身代わりとなり、消えゆく運命を退ける。",
     "trigger": "selfWouldBeDestroyed"
   },
